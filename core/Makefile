@@ -25,16 +25,16 @@ endif
 
 #check AVX support
 ifeq ($(strip $(shell uname)),Darwin)
-HAVE_AVX2 ?= $(sysctl -a | grep machdep.cpu.features | grep " FMA " | wc -l)
-HAVE_AVX ?= $(sysctl -a | grep machdep.cpu.features | grep " AVX1.0 " | wc -l)
+HAVE_AVX2 ?= $(strip $(shell sysctl -a | grep machdep.cpu.features | grep " FMA " | wc -l))
+HAVE_AVX ?= $(strip $(shell sysctl -a | grep machdep.cpu.features | grep " AVX1.0 " | wc -l))
 else
-HAVE_AVX2 ?= $(shell grep " avx2 " /proc/cpuinfo | wc -l)
-HAVE_AVX ?= $(shell grep " avx " /proc/cpuinfo | wc -l)
+HAVE_AVX2 ?= $(strip $(shell grep " avx2 " /proc/cpuinfo | wc -l))
+HAVE_AVX ?= $(strip $(shell grep " avx " /proc/cpuinfo | wc -l))
 endif
-ifneq ($(strip $(HAVE_AVX2)),0)
+ifneq ($(HAVE_AVX2),0)
 	HAVE_AVX2 = 1
 endif
-ifneq ($(strip $(HAVE_AVX)),0)
+ifneq ($(HAVE_AVX),0)
 	HAVE_AVX = 1
 endif
 ifeq ($(strip $(HAVE_AVX2)),1)

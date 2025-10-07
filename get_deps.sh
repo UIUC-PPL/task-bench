@@ -199,13 +199,9 @@ export CHARM_SMP_DIR="\$TASKBENCH_DEPS_DIR"/charm++_smp
 EOF
     mkdir "$CHARM_DIR"
     mkdir "$CHARM_SMP_DIR"
-    wget -nv https://charm.cs.illinois.edu/distrib/charm-6.9.0.tar.gz
-    tar xfz charm-6.9.0.tar.gz -C "$CHARM_DIR" --strip-components 1
-    tar xfz charm-6.9.0.tar.gz -C "$CHARM_SMP_DIR" --strip-components 1
-    rm charm-6.9.0.tar.gz
-
-    # git clone http://charm.cs.illinois.edu/gerrit/charm "$CHARM_DIR"
-    # git clone http://charm.cs.illinois.edu/gerrit/charm "$CHARM_SMP_DIR"
+    #wget -nv https://charm.cs.illinois.edu/distrib/charm-6.9.0.tar.gz
+    git clone https://github.com/charmplusplus/charm.git "$CHARM_DIR"
+    git clone https://github.com/charmplusplus/charm.git "$CHARM_SMP_DIR"
 fi
 
 if [[ $USE_CHAPEL -eq 1 ]]; then

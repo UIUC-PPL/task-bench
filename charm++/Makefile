@@ -11,7 +11,7 @@ $(BIN): main.o subchare.o vectorWrapper.o
 	$(CHARMC) -language charm++ -o $@ main.o subchare.o vectorWrapper.o -L../core -lcore_s
 
 main.o : main.C main.h main.decl.h main.def.h subchare.decl.h
-	$(CHARMC) -optimize -o main.o main.C
+	$(CHARMC) -optimize -o main.o -c main.C
 
 main.decl.h main.def.h : main.ci
 	$(CHARMC) main.ci
@@ -19,7 +19,7 @@ main.decl.h main.def.h : main.ci
 main.h : subchare.decl.h
 
 subchare.o : subchare.C subchare.h subchare.decl.h subchare.def.h main.h main.decl.h
-	$(CHARMC) -optimize -o subchare.o subchare.C
+	$(CHARMC) -optimize -o subchare.o -c subchare.C
 
 subchare.decl.h subchare.def.h : subchare.ci
 	$(CHARMC) subchare.ci
